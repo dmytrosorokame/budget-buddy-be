@@ -1,14 +1,15 @@
 version: '3.8'
 services:
   dev-db:
-   image: postgres:13
-   ports:
-     - 5434:5432
-   environment:
-     POSTGRES_USER: postgres
-     POSTGRES_PASSWORD: 123
-     POSTGRES_DB: nest
-   networks:
+    image: mysql:5.7
+    ports:
+      - '3308:3308'
+    environment:
+      MYSQL_DATABASE: nest
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123
+      MYSQL_ROOT_PASSWORD: password
+    networks:
      - budget-buddy
 networks:
   budget-buddy:
