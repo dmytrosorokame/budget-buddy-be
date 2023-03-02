@@ -1,15 +1,18 @@
-version: '3.8'
+version: '3.3'
 services:
   dev-db:
     image: mysql:5.7
-    ports:
-      - '3308:3308'
+    restart: always
     environment:
-      MYSQL_DATABASE: nest
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: 123
-      MYSQL_ROOT_PASSWORD: password
-    networks:
-     - budget-buddy
-networks:
-  budget-buddy:
+      MYSQL_DATABASE: 'nest'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:
