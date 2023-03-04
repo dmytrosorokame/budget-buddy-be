@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
-import { UpdateResult } from 'typeorm';
 
 import { GetUser } from './../auth/decorators/get-user.decorator';
 import { JwtGuard } from './../auth/guard/jwt.guard';
@@ -18,7 +17,7 @@ export class UserController {
   }
 
   @Patch()
-  changeUser(@GetUser('id') userId: number, @Body() dto: UpdateUserDto): Promise<UpdateResult> {
+  changeUser(@GetUser('id') userId: number, @Body() dto: UpdateUserDto): Promise<User> {
     return this.userService.updateUser(userId, dto);
   }
 }

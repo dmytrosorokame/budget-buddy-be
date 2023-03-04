@@ -1,6 +1,6 @@
 import { IsEnum, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
-import { ExpensesTypes } from './../../types/expense.types';
+import { ExpensesTypes } from '../../types/expense.types';
 
 export class CreateExpenseDto {
   @IsEnum(ExpensesTypes)
