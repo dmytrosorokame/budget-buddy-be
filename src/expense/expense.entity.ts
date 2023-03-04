@@ -17,6 +17,6 @@ export class Expense {
   @Column()
   amount: number;
 
-  @ManyToOne(() => Budget, (budget) => budget.expenses)
+  @ManyToOne(() => Budget, (budget) => budget.expenses, { onDelete: 'CASCADE' })
   budget: Budget;
 }

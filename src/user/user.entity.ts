@@ -13,6 +13,9 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Budget, (budget) => budget.user, { cascade: true })
+  @Column('varchar', { default: 'USD' })
+  currency: string;
+
+  @OneToMany(() => Budget, (budget) => budget.user)
   budgets: Budget[];
 }

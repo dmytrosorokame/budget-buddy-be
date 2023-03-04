@@ -11,9 +11,12 @@ export class Budget {
   @Column()
   created_at: Date;
 
-  @ManyToOne(() => User, (user) => user.budgets)
+  @Column()
+  income: string;
+
+  @ManyToOne(() => User, (user) => user.budgets, { onDelete: 'CASCADE' })
   user: User;
 
-  @OneToMany(() => Expense, (expense) => expense.budget, { cascade: true })
+  @OneToMany(() => Expense, (expense) => expense.budget)
   expenses: Expense[];
 }
