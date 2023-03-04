@@ -1,1 +1,1 @@
-export * from './CreateBudget.dto';
+export * from './create-budget.dto';

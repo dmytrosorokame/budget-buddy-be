@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Budget } from './../budget/budget.entity';
+import { Currency } from './../types/user.types';
 
 @Entity()
 export class User {
@@ -14,7 +15,7 @@ export class User {
   password: string;
 
   @Column('varchar', { default: 'USD' })
-  currency: string;
+  currency: Currency;
 
   @OneToMany(() => Budget, (budget) => budget.user)
   budgets: Budget[];
