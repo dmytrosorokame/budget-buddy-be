@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { Expense } from './../expense/expense.entity';
 import { User } from './../user/user.entity';
 import { Budget } from './budget.entity';
-import { CreateBudgetDto } from './dto';
+import { CreateBudgetDto } from './dto/create-budget.dto';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
 
 @Injectable()

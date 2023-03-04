@@ -5,7 +5,7 @@ import { JwtGuard } from './../auth/guard/jwt.guard';
 import { User } from './../user/user.entity';
 import { Budget } from './budget.entity';
 import { BudgetService } from './budget.service';
-import { CreateBudgetDto } from './dto';
+import { CreateBudgetDto } from './dto/create-budget.dto';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
 
 @UseGuards(JwtGuard)

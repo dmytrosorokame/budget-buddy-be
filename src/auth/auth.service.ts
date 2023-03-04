@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 
 import { ITokenResponse } from './../types/auth.types';
 import { User } from './../user/user.entity';
-import { AuthDto } from './dto';
+import { AuthDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
