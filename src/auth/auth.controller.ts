@@ -2,7 +2,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 
 import { ITokenResponse } from './../types/auth.types';
 import { AuthService } from './auth.service';
-import { AuthDto } from './dto';
+import { AuthDto } from './dto/auth.dto';
 
 @Controller('auth')
 export class AuthController {
