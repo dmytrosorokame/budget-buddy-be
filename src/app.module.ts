@@ -5,7 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { Budget } from './budget/budget.entity';
 import { BudgetModule } from './budget/budget.module';
+import { Expense } from './expense/expense.entity';
+import { ExpenseModule } from './expense/expense.module';
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
 
@@ -24,7 +27,7 @@ import { UserModule } from './user/user.module';
           username: config.get<string>('DB_USERNAME'),
           password: config.get<string>('DB_PASSWORD'),
           database: config.get<string>('DB_DATABASE'),
-          entities: [User],
+          entities: [User, Budget, Expense],
           synchronize: true,
         };
       },
@@ -33,6 +36,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     UserModule,
     BudgetModule,
+    ExpenseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
