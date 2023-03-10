@@ -47,15 +47,30 @@ export class BudgetService {
   async update(budgetId: number, dto: UpdateBudgetDto): Promise<Budget> {
     const { expenses, ...other } = dto;
 
+    const budget = await this.budgetRepo.findOne({ where: { id: budgetId } });
+
     if (expenses) {
       for (const expense of dto.expenses) {
-        await this.expenseRepo.update(expense.id, expense);
+        const currentExpense = await this.expenseRepo.findOne({ where: { id: expense.id } });
+
+        if (!currentExpense) {
+          const createdExpense = await this.expenseRepo.create({
+            type: expense.type,
+            amount: expense.amount,
+            name: expense.name,
+            budget,
+          });
+
+          await this.expenseRepo.save(createdExpense);
+        } else {
+          await this.expenseRepo.update(expense.id, expense);
+        }
       }
     }
 
     await this.budgetRepo.update(budgetId, other);
 
-    return this.budgetRepo.findOne({ where: { id: budgetId } });
+    return this.budgetRepo.findOne({ relations: ['user', 'expenses'], where: { id: budgetId } });
   }
 
   async delete(budgetId: number): Promise<Budget> {
