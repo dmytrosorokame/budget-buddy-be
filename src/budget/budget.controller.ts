@@ -18,6 +18,11 @@ export class BudgetController {
     return this.budgetService.getAll(userId);
   }
 
+  @Get(':id')
+  getOne(@Param('id') budgetId: number, @GetUser('id') userId: number): Promise<Budget> {
+    return this.budgetService.getOne(budgetId, userId);
+  }
+
   @Post()
   create(@GetUser() user: User, @Body() dto: CreateBudgetDto): Promise<Budget> {
     return this.budgetService.create(user, dto);

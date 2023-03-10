@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, MethodNotAllowedException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -17,7 +17,7 @@ export class BudgetService {
 
   async getAll(userId: number): Promise<Budget[]> {
     const budgets = await this.budgetRepo.find({
-      relations: ['user'],
+      relations: ['user', 'expenses'],
       where: {
         user: {
           id: userId,
@@ -26,6 +26,16 @@ export class BudgetService {
     });
 
     return budgets;
+  }
+
+  async getOne(budgetId: number, userId: number): Promise<Budget> {
+    const budget = await this.budgetRepo.findOne({ relations: ['user', 'expenses'], where: { id: budgetId } });
+
+    if (budget?.user?.id !== userId) {
+      throw new MethodNotAllowedException("You can't get not your budget");
+    }
+
+    return budget;
   }
 
   async create(user: User, dto: CreateBudgetDto): Promise<Budget> {
